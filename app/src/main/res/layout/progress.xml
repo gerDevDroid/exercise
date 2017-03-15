@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="25dp">
+    android:padding="@dimen/progess_padding">
 
     <com.gerus.reddit.views.CustomProgressView
         android:id="@+id/progressView"
@@ -21,7 +21,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="left"
-        android:paddingLeft="25dp"
+        android:paddingLeft="@dimen/progess_txt_padding"
         android:text="@string/app_name"
         android:textColor="@color/black" />
 

@@ -36,23 +36,30 @@ public class DetailNewActivity extends AppCompatActivity {
 
         prcInitComponents();
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("");
+        ActionBar voActionBar = getSupportActionBar();
+        voActionBar.setDisplayHomeAsUpEnabled(true);
+        voActionBar.setTitle("");
         mCollapsing = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 
         if(getIntent().getExtras()!=null){
             mNewsData = getIntent().getExtras().getParcelable(NewsData.ID);
-
-            Glide.with(mContext).load(mNewsData.getThumbnail()).diskCacheStrategy(DiskCacheStrategy.SOURCE).placeholder(R.drawable.vc_image).error(R.mipmap.ic_launcher).into(mImage);
-            mAuthor.setSubtitle(mNewsData.getAuthor());
-            mDate.setSubtitle(UDate.getCompleteDate(new Date(mNewsData.getCreated() * 1000)));
-            mLink.setSubtitle(mNewsData.getUrl());
-            mDescription.setText(mNewsData.getTitle());
+            if(mNewsData!=null){
+                prcFillData();
+            } else {
+                finish();
+            }
         } else {
             finish();
         }
 
+    }
+
+    private void prcFillData() {
+        Glide.with(mContext).load(mNewsData.getThumbnail()).diskCacheStrategy(DiskCacheStrategy.SOURCE).placeholder(R.drawable.vc_image).error(R.mipmap.ic_launcher).into(mImage);
+        mAuthor.setSubtitle(mNewsData.getAuthor());
+        mDate.setSubtitle(UDate.getCompleteDate(new Date(mNewsData.getCreated() * 1000)));
+        mLink.setSubtitle(mNewsData.getUrl());
+        mDescription.setText(mNewsData.getTitle());
     }
 
     @Override
