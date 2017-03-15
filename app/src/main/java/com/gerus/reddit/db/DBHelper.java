@@ -20,7 +20,6 @@ import java.sql.SQLException;
 public class DBHelper extends OrmLiteSqliteOpenHelper {
 
     private Context mContext;
-    private Dao<News, Integer> voNewsDAO;
     private Dao<NewsData, String> voNewsDataDAO;
 
     public DBHelper(Context context) {
@@ -31,7 +30,6 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
-            TableUtils.createTable(connectionSource, News.class);
             TableUtils.createTable(connectionSource, NewsData.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,11 +39,6 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
 
-    }
-
-    protected Dao<News, Integer> getNewsDAO() throws SQLException {
-        if (voNewsDAO == null) voNewsDAO = getDao(News.class);
-        return voNewsDAO;
     }
 
     protected Dao<NewsData, String> getNewsDataDAO() throws SQLException {

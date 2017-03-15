@@ -7,7 +7,11 @@ import com.gerus.reddit.BuildConfig;
 import com.gerus.reddit.interfaces.WebTasksInterface;
 import com.gerus.reddit.models.network.NetworkModel;
 import com.gerus.reddit.models.vo.Data;
+import com.gerus.reddit.models.vo.NewsData;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by gerus-mac on 14/03/17.
@@ -49,7 +53,11 @@ public class WebTasks {
                 if (poNetWorkModel.getStatusCode() == 200) {
                     try {
                         Data poData = new Gson().fromJson(poNetWorkModel.getMessage(), Data.class);
-                        poResult.onResult(poData.getData().getChildrens());
+                        List<NewsData> poNewsDatas = new ArrayList<NewsData>();
+                        for (int i = 0; i < poData.getData().getChildrens().size(); i++) {
+                            poNewsDatas.add(poData.getData().getChildrens().get(i).getData());
+                        }
+                        poResult.onResult(poNewsDatas);
                     } catch (Exception e) {
                         poResult.onError(poNetWorkModel.getMessage());
                     }

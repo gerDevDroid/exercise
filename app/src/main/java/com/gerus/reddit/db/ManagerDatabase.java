@@ -1,11 +1,10 @@
 package com.gerus.reddit.db;
 
 import android.content.Context;
-import android.util.Log;
 
-import com.gerus.reddit.models.vo.News;
 import com.gerus.reddit.models.vo.NewsData;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.table.TableUtils;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -44,34 +43,30 @@ public class ManagerDatabase {
         return dbHelper;
     }
 
-    public List<News> getNews() {
+    public List<NewsData> getNewsData() {
         try {
-            return dbHelper.getNewsDAO().queryForAll();
+            return dbHelper.getNewsDataDAO().queryForAll();
         } catch (SQLException e) {
             e.printStackTrace();
-            return new ArrayList<News>();
+            return new ArrayList<NewsData>();
         }
     }
 
-    public boolean saveNews(List<News> poNewses) {
-        for (int i = 0; i < poNewses.size(); i++) {
-            try {
-                saveNew(poNewses.get(i));
-                saveNewData(poNewses.get(i).getData());
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
+    public boolean saveNewsData(List<NewsData> poNewses) {
+        try {
+            TableUtils.clearTable(dbHelper.getConnectionSource(), NewsData.class);
+            for (int i = 0; i < poNewses.size(); i++) {
+                saveNewData(poNewses.get(i));
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
         return true;
     }
 
     private void saveNewData(NewsData newsData) throws SQLException {
         dbHelper.getNewsDataDAO().createOrUpdate(newsData);
-    }
-
-    private void saveNew(News poNews) throws SQLException {
-        dbHelper.getNewsDAO().createOrUpdate(poNews);
     }
 
 }

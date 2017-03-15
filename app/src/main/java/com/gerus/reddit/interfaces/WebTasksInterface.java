@@ -1,6 +1,7 @@
 package com.gerus.reddit.interfaces;
 
 import com.gerus.reddit.models.vo.News;
+import com.gerus.reddit.models.vo.NewsData;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 public interface WebTasksInterface {
 
     interface NewsResult {
-        void onResult(List<News> news);
+        void onResult(List<NewsData> news);
         void onError(String errorMsg);
     }
 

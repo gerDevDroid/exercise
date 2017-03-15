@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.gerus.reddit.R;
 import com.gerus.reddit.models.vo.News;
 import com.gerus.reddit.models.vo.NewsData;
@@ -23,9 +24,9 @@ import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
     private static final int MAX_LENGHT = 25;
     private Context mContext;
-    private List<News> mList;
+    private List<NewsData> mList;
 
-    public NewsAdapter(Context poContext, List<News> poList){
+    public NewsAdapter(Context poContext, List<NewsData> poList){
         mContext = poContext;
         mList = poList;
     }
@@ -38,9 +39,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        NewsData poNewsData = mList.get(position).getData();
+        NewsData poNewsData = mList.get(position);
         holder.mTitle.setText(UString.fncsSplit(poNewsData.getTitle(),MAX_LENGHT));
-        Glide.with(mContext).load(poNewsData.getThumbnail()).placeholder(R.drawable.vc_warning_black).error(R.mipmap.ic_launcher).into(holder.mImageView);
+        Glide.with(mContext).load(poNewsData.getThumbnail()).diskCacheStrategy(DiskCacheStrategy.SOURCE).placeholder(R.drawable.vc_warning_black).error(R.mipmap.ic_launcher).into(holder.mImageView);
     }
 
     @Override

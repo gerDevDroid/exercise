@@ -11,16 +11,9 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by gerus-mac on 14/03/17.
  */
 
-@DatabaseTable
 public class News implements Parcelable {
-
-    @DatabaseField(generatedId = true)
     private Integer id;
-
-    @DatabaseField
     private String kind;
-
-    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true)
     private NewsData data;
 
     public String getKind() {
