@@ -3,22 +3,48 @@ package com.gerus.reddit.models.vo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.table.DatabaseTable;
+
 /**
  * Created by gerus-mac on 14/03/17.
  */
 
+@DatabaseTable
 public class NewsData implements Parcelable {
 
+    @DatabaseField
     private String subreddit;
+
+    @DatabaseField
     private boolean contest_mode;
+
+    @DatabaseField(id=true, useGetSet=true)
     private String id;
+
+    @DatabaseField
     private String author;
+
+    @DatabaseField
     private boolean over_18;
+
+    @DatabaseField
     private String thumbnail;
+
+    @DatabaseField
     private String permalink;
+
+    @DatabaseField
     private int created;
+
+    @DatabaseField
     private String url;
+
+    @DatabaseField
     private String title;
+
+    @DatabaseField
     private int num_comments;
 
     public String getSubreddit() {
