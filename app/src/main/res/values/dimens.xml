@@ -10,4 +10,7 @@
     <dimen name="card_news_txt_padding">16dp</dimen>
 
     <dimen name="activity_detail_appBarLayout">250dp</dimen>
+    <dimen name="item_detail_liner_padding">10dp</dimen>
+
+    <dimen name="view_floating_size">50dp</dimen>
 </resources>

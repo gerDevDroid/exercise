@@ -7,4 +7,6 @@
     <string name="retry_network_tt">No se puede conectar</string>
     <string name="retry_network_description">Toca la pantalla para volver a intentarlo</string>
     <string name="error_network">Error de comunicación</string>
+    <string name="author">Autor</string>
+    <string name="date_creation">Fecha de creación</string>
 </resources>

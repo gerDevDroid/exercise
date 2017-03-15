@@ -45,45 +45,18 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout style="@style/item_layout">
+            <com.gerus.reddit.views.CustomDouble
+                app:cd_text1="@string/author"
+                app:cd_color="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/floating"
-                    android:scaleType="center"
-                    android:src="@drawable/vc_cloud_off"
-                    style="@style/Floating" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight=".90"
-                    android:orientation="vertical"
-                    android:padding="10dp"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/text1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_weight=".5"
-                        android:text="@string/app_name"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/text2"
-                        android:layout_width="match_parent"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent"
-                        android:layout_weight=".5"
-                        android:text="@string/app_name" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
+            <com.gerus.reddit.views.CustomDouble
+                app:cd_text1="@string/date_creation"
+                app:cd_color="@color/blue"
+                app:cd_icon="@drawable/vc_calendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
