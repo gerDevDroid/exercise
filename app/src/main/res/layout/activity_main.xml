@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gerus.reddit.MainActivity">
+    tools:context="com.gerus.reddit.activities.MainActivity">
 
     <include layout="@layout/toolbar"/>
 
