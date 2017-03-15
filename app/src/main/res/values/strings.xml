@@ -6,4 +6,5 @@
     <!-- Loading info -->
     <string name="retry_network_tt">No se puede conectar</string>
     <string name="retry_network_description">Toca la pantalla para volver a intentarlo</string>
+    <string name="error_network">Error de comunicación</string>
 </resources>
