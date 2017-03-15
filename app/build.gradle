@@ -17,6 +17,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "LOG", "false"
+            buildConfigField "String", "URL", "\"https://www.reddit.com/.json\""
+        }
+
+        debug{
+            buildConfigField "boolean", "LOG", "true"
+            buildConfigField "String", "URL", "\"https://www.reddit.com/.json\""
         }
     }
 }
