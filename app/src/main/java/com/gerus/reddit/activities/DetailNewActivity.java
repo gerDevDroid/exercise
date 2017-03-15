@@ -46,7 +46,7 @@ public class DetailNewActivity extends AppCompatActivity {
 
             Glide.with(mContext).load(mNewsData.getThumbnail()).diskCacheStrategy(DiskCacheStrategy.SOURCE).placeholder(R.drawable.vc_image).error(R.mipmap.ic_launcher).into(mImage);
             mAuthor.setSubtitle(mNewsData.getAuthor());
-            mDate.setSubtitle(UDate.getFormatDate(new Date(mNewsData.getCreated())));
+            mDate.setSubtitle(UDate.getCompleteDate(new Date(mNewsData.getCreated() * 1000)));
             mLink.setSubtitle(mNewsData.getUrl());
             mDescription.setText(mNewsData.getTitle());
         } else {

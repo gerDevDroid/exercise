@@ -13,7 +13,7 @@ import java.util.TreeMap;
 public class UDate {
 
     public static final String FORMAT_ALL_DATE = "yyyy-MM-dd'T'HH:mm:ss";
-    public static final String FORMAT_COMPLETE_DATE = "E, d MMM yyyy   hh:mm a";
+    public static final String FORMAT_COMPLETE_DATE = "d MMM yyyy    hh:mm a";
     public static final String FORMAT_DAY_DATE = "E, d MMM yyyy";
     public static final String FORMAT_DATE = "dd/MM/yyyy";
     public static final String FORMAT_HOUR = "hh:mm a";
