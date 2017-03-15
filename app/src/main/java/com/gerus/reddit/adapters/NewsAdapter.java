@@ -13,7 +13,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.gerus.reddit.R;
 import com.gerus.reddit.interfaces.NewsAdapterInterface;
 import com.gerus.reddit.models.vo.NewsData;
-import com.gerus.reddit.utils.UString;
 
 import java.util.List;
 
@@ -26,7 +25,6 @@ public class NewsAdapter extends RecyclerView.Adapter{
     private static final int VIEW_TYPE_EMPTY_LIST_PLACEHOLDER = 0;
     private static final int VIEW_TYPE_OBJECT_VIEW = 1;
 
-    private static final int MAX_LENGHT = 25;
     private Context mContext;
     private List<NewsData> mList;
     private NewsAdapterInterface mInterface;
@@ -52,12 +50,12 @@ public class NewsAdapter extends RecyclerView.Adapter{
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(holder instanceof ViewHolder) {
-            final ViewHolder voHolder = (ViewHolder) holder;
-            final NewsData poNewsData = mList.get(position);
+    public void onBindViewHolder(RecyclerView.ViewHolder poHolder, int piPosition) {
+        if(poHolder instanceof ViewHolder) {
+            final ViewHolder voHolder = (ViewHolder) poHolder;
+            final NewsData poNewsData = mList.get(piPosition);
 
-            voHolder.mTitle.setText(UString.fncsSplit(poNewsData.getTitle(),MAX_LENGHT));
+            voHolder.mTitle.setText(poNewsData.getTitle());
             Glide.with(mContext).load(poNewsData.getThumbnail()).diskCacheStrategy(DiskCacheStrategy.SOURCE).placeholder(R.drawable.vc_image).error(R.mipmap.ic_launcher).into(voHolder.mImageView);
             voHolder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -65,8 +63,8 @@ public class NewsAdapter extends RecyclerView.Adapter{
                     if(mInterface!=null) mInterface.onItemSelected(poNewsData);
                 }
             });
-        } else if (holder instanceof ViewEmpty){
-            final ViewEmpty voHolder = (ViewEmpty) holder;
+        } else if (poHolder instanceof ViewEmpty){
+            final ViewEmpty voHolder = (ViewEmpty) poHolder;
             voHolder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

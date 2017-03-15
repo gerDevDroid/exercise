@@ -16,4 +16,5 @@
     <dimen name="activity_detail_text_margin">20dp</dimen>
     <dimen name="activity_detail_text_size">18sp</dimen>
     <dimen name="dialog_icon">80dp</dimen>
+    <dimen name="txt_card_news">13sp</dimen>
 </resources>

@@ -39,7 +39,7 @@ public class NewsData implements Parcelable {
     private String permalink;
 
     @DatabaseField
-    private int created;
+    private long created;
 
     @DatabaseField
     private String url;
@@ -106,7 +106,7 @@ public class NewsData implements Parcelable {
         this.permalink = permalink;
     }
 
-    public int getCreated() {
+    public long getCreated() {
         return created;
     }
 
@@ -138,6 +138,7 @@ public class NewsData implements Parcelable {
         this.num_comments = num_comments;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -152,7 +153,7 @@ public class NewsData implements Parcelable {
         dest.writeByte(this.over_18 ? (byte) 1 : (byte) 0);
         dest.writeString(this.thumbnail);
         dest.writeString(this.permalink);
-        dest.writeInt(this.created);
+        dest.writeLong(this.created);
         dest.writeString(this.url);
         dest.writeString(this.title);
         dest.writeInt(this.num_comments);
@@ -169,7 +170,7 @@ public class NewsData implements Parcelable {
         this.over_18 = in.readByte() != 0;
         this.thumbnail = in.readString();
         this.permalink = in.readString();
-        this.created = in.readInt();
+        this.created = in.readLong();
         this.url = in.readString();
         this.title = in.readString();
         this.num_comments = in.readInt();

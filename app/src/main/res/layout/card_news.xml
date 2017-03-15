@@ -27,6 +27,9 @@
                 android:id="@+id/txt_card_news"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="@integer/maxLines"
+                android:lines="@integer/maxLines"
+                android:textSize="@dimen/txt_card_news"
                 android:padding="@dimen/card_news_txt_padding"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
