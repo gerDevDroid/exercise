@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.gerus.reddit.R;
-import com.gerus.reddit.models.vo.News;
+import com.gerus.reddit.interfaces.NewsAdapterInterface;
 import com.gerus.reddit.models.vo.NewsData;
 import com.gerus.reddit.utils.UString;
 
@@ -25,10 +25,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
     private static final int MAX_LENGHT = 25;
     private Context mContext;
     private List<NewsData> mList;
+    private NewsAdapterInterface mInterface;
 
-    public NewsAdapter(Context poContext, List<NewsData> poList){
+    public NewsAdapter(Context poContext, List<NewsData> poList, NewsAdapterInterface poInterface){
         mContext = poContext;
         mList = poList;
+        mInterface = poInterface;
     }
 
     @Override
@@ -39,9 +41,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        NewsData poNewsData = mList.get(position);
+        final NewsData poNewsData = mList.get(position);
+
         holder.mTitle.setText(UString.fncsSplit(poNewsData.getTitle(),MAX_LENGHT));
         Glide.with(mContext).load(poNewsData.getThumbnail()).diskCacheStrategy(DiskCacheStrategy.SOURCE).placeholder(R.drawable.vc_warning_black).error(R.mipmap.ic_launcher).into(holder.mImageView);
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mInterface!=null) mInterface.onItemSelected(poNewsData);
+            }
+        });
     }
 
     @Override
