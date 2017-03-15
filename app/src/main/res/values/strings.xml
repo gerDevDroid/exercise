@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Reddit</string>
+    <string name="retry_network_tt">No se puede conectar</string>
+    <string name="retry_network_description">Toca la pantalla para volver a intentarlo</string>
 </resources>

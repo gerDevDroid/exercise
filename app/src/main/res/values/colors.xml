@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#e23c00</color>
     <color name="colorAccent">#FFFFFF</color>
 
+    <color name="icon_color">#BDBDBD</color>
+
     <!-- General colors -->
     <color name="transparent">#00000000</color>
     <color name="white">#FFFFFF</color>
