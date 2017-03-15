@@ -2,7 +2,10 @@
 <resources>
     <color name="colorPrimary">#FF4500</color>
     <color name="colorPrimaryDark">#e23c00</color>
-    <color name="colorAccent">#FFFFFF</color>
+    <color name="colorAccent">#FA8440</color>
+
+    <color name="floating_button">#336699</color>
+
 
     <color name="icon_color">#BDBDBD</color>
 

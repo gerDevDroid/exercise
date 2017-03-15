@@ -46,17 +46,34 @@
             android:orientation="vertical">
 
             <com.gerus.reddit.views.CustomDouble
+                android:id="@+id/customDouble_author"
                 app:cd_text1="@string/author"
-                app:cd_color="@color/blue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <com.gerus.reddit.views.CustomDouble
+                android:id="@+id/customDouble_date"
                 app:cd_text1="@string/date_creation"
-                app:cd_color="@color/blue"
                 app:cd_icon="@drawable/vc_calendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+
+            <com.gerus.reddit.views.CustomDouble
+                android:id="@+id/customDouble_link"
+                app:cd_text1="@string/link"
+                app:cd_icon="@drawable/vc_web"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                style="?android:textAppearanceMedium"
+                android:textStyle="bold"
+                android:textSize="@dimen/activity_detail_text_size"
+                android:layout_margin="@dimen/activity_detail_text_margin"
+                android:text="@string/error_network"
+                android:id="@+id/txt_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

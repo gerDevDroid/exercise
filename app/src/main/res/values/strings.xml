@@ -9,4 +9,5 @@
     <string name="error_network">Error de comunicación</string>
     <string name="author">Autor</string>
     <string name="date_creation">Fecha de creación</string>
+    <string name="link">Enlace</string>
 </resources>

@@ -3,8 +3,12 @@ package com.gerus.reddit.views;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.text.Html;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +39,7 @@ public class CustomDouble extends LinearLayout {
         String psTxt1,psTxt2;
         TypedArray voStyle = context.obtainStyledAttributes(attrs, R.styleable.CustomDouble, 0, 0);
         try {
-            viColor = voStyle.getColor(R.styleable.CustomDouble_cd_color, ContextCompat.getColor(mContext,R.color.colorAccent));
+            viColor = voStyle.getColor(R.styleable.CustomDouble_cd_color, ContextCompat.getColor(mContext,R.color.floating_button));
             psTxt1 = voStyle.getString(R.styleable.CustomDouble_cd_text1);
             psTxt2 = voStyle.getString(R.styleable.CustomDouble_cd_text2);
             viIcon = voStyle.getResourceId(R.styleable.CustomDouble_cd_icon, R.drawable.vc_account);
@@ -52,12 +56,26 @@ public class CustomDouble extends LinearLayout {
         mButton = (FloatingActionButton) voView.findViewById(R.id.floating);
         mText1 = (TextView) voView.findViewById(R.id.text1);
         mText2 = (TextView) voView.findViewById(R.id.text2);
+        mText2.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     private void prcInit(int mColor, String psTxt1, String psTxt2, int piDrawable) {
         mButton.setBackgroundTintList(ColorStateList.valueOf(mColor));
         mButton.setImageResource(piDrawable);
         mText1.setText(psTxt1);
-        mText2.setText(psTxt2);
+        mText2.setText(fromHtml(psTxt2));
+    }
+
+    public void setSubtitle(String psMsg){
+        mText2.setText(fromHtml(psMsg));
+    }
+
+    @SuppressWarnings("deprecation")
+    public static Spanned fromHtml(String source) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            return Html.fromHtml(source);
+        }
     }
 }
