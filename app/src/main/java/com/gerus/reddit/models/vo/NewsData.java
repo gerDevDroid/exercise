@@ -14,6 +14,7 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable
 public class NewsData implements Parcelable {
 
+    public static final String LIST_ID = "LIST_"+NewsData.class.getSimpleName();
     public static final String ID = NewsData.class.getSimpleName();
 
     @DatabaseField

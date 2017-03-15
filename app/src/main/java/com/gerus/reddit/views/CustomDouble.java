@@ -63,19 +63,12 @@ public class CustomDouble extends LinearLayout {
         mButton.setBackgroundTintList(ColorStateList.valueOf(mColor));
         mButton.setImageResource(piDrawable);
         mText1.setText(psTxt1);
-        mText2.setText(fromHtml(psTxt2));
+        if(psTxt2!=null) mText2.setText(Html.fromHtml(psTxt2));
     }
 
     public void setSubtitle(String psMsg){
-        mText2.setText(fromHtml(psMsg));
+        mText2.setText(Html.fromHtml(psMsg));
     }
 
-    @SuppressWarnings("deprecation")
-    public static Spanned fromHtml(String source) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
-        } else {
-            return Html.fromHtml(source);
-        }
-    }
+
 }

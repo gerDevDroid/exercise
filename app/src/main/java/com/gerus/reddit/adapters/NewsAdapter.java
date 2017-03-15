@@ -21,7 +21,11 @@ import java.util.List;
  * Created by gerus-mac on 14/03/17.
  */
 
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
+public class NewsAdapter extends RecyclerView.Adapter{
+
+    private static final int VIEW_TYPE_EMPTY_LIST_PLACEHOLDER = 0;
+    private static final int VIEW_TYPE_OBJECT_VIEW = 1;
+
     private static final int MAX_LENGHT = 25;
     private Context mContext;
     private List<NewsData> mList;
@@ -34,28 +38,70 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_news, parent, false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View mView = null;
+        switch(viewType) {
+            case VIEW_TYPE_EMPTY_LIST_PLACEHOLDER:
+                mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.empty_layout, parent, false);
+                return new ViewEmpty(mView);
+            case VIEW_TYPE_OBJECT_VIEW:
+                mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_news, parent, false);
+                return new ViewHolder(mView);
+        }
+        return new ViewHolder(mView);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        final NewsData poNewsData = mList.get(position);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if(holder instanceof ViewHolder) {
+            final ViewHolder voHolder = (ViewHolder) holder;
+            final NewsData poNewsData = mList.get(position);
 
-        holder.mTitle.setText(UString.fncsSplit(poNewsData.getTitle(),MAX_LENGHT));
-        Glide.with(mContext).load(poNewsData.getThumbnail()).diskCacheStrategy(DiskCacheStrategy.SOURCE).placeholder(R.drawable.vc_warning_black).error(R.mipmap.ic_launcher).into(holder.mImageView);
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mInterface!=null) mInterface.onItemSelected(poNewsData);
-            }
-        });
+            voHolder.mTitle.setText(UString.fncsSplit(poNewsData.getTitle(),MAX_LENGHT));
+            Glide.with(mContext).load(poNewsData.getThumbnail()).diskCacheStrategy(DiskCacheStrategy.SOURCE).placeholder(R.drawable.vc_image).error(R.mipmap.ic_launcher).into(voHolder.mImageView);
+            voHolder.mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mInterface!=null) mInterface.onItemSelected(poNewsData);
+                }
+            });
+        } else if (holder instanceof ViewEmpty){
+            final ViewEmpty voHolder = (ViewEmpty) holder;
+            voHolder.mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mInterface!=null) mInterface.onClickEmptyLayout();
+                }
+            });
+        }
+
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (mList.isEmpty()) {
+            return VIEW_TYPE_EMPTY_LIST_PLACEHOLDER;
+        } else {
+            return VIEW_TYPE_OBJECT_VIEW;
+        }
+    }
+
+    public int getNumberColumns() {
+        if(mList.isEmpty()){
+            return mContext.getResources().getInteger(R.integer.numberColumns);
+        }else {
+            return 1;
+        }
+    }
+
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        if(mList.isEmpty()){
+            return 1;
+        }else {
+            return mList.size();
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -70,6 +116,15 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
             mTitle = (TextView) poView.findViewById(R.id.txt_card_news);
             mImageView = (ImageView) poView.findViewById(R.id.image_card_news);
 
+        }
+    }
+
+    public class ViewEmpty extends RecyclerView.ViewHolder {
+        public final View mView;
+
+        public ViewEmpty(View view) {
+            super(view);
+            mView = view;
         }
     }
 }

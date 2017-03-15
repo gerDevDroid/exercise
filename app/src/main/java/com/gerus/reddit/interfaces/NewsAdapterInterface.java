@@ -9,4 +9,5 @@ import com.gerus.reddit.models.vo.NewsData;
 public interface NewsAdapterInterface {
 
     void onItemSelected(NewsData poNews);
+    void onClickEmptyLayout();
 }

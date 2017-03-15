@@ -4,9 +4,11 @@
     <string name="loading_data">Cargando información</string>
 
     <!-- Loading info -->
-    <string name="retry_network_tt">No se puede conectar</string>
-    <string name="retry_network_description">Toca la pantalla para volver a intentarlo</string>
-    <string name="error_network">Error de comunicación</string>
+    <string name="retry_data_tt">No hay información para mostrar</string>
+    <string name="retry_data_description">Desliza la pantalla para abajo, para actualizar la información</string>
+
+    <string name="error_network">Verifica tu conexión a Internet</string>
+
     <string name="author">Autor</string>
     <string name="date_creation">Fecha de creación</string>
     <string name="link">Enlace</string>

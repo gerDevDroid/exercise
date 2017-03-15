@@ -6,6 +6,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +17,6 @@ import com.gerus.reddit.models.vo.NewsData;
 import com.gerus.reddit.utils.UDate;
 import com.gerus.reddit.views.CustomDouble;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class DetailNewActivity extends AppCompatActivity {
@@ -26,7 +26,7 @@ public class DetailNewActivity extends AppCompatActivity {
     private CustomDouble mLink, mAuthor, mDate;
     private TextView mDescription;
 
-    private CollapsingToolbarLayout collapsingToolbarLayout = null;
+    private CollapsingToolbarLayout mCollapsing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +35,16 @@ public class DetailNewActivity extends AppCompatActivity {
         mContext = this;
 
         prcInitComponents();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setTitle(getResources().getString(R.string.app_name));
-
+        actionBar.setTitle("");
+        mCollapsing = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 
         if(getIntent().getExtras()!=null){
             mNewsData = getIntent().getExtras().getParcelable(NewsData.ID);
 
-            Glide.with(mContext).load(mNewsData.getThumbnail()).diskCacheStrategy(DiskCacheStrategy.SOURCE).placeholder(R.drawable.vc_warning_black).error(R.mipmap.ic_launcher).into(mImage);
+            Glide.with(mContext).load(mNewsData.getThumbnail()).diskCacheStrategy(DiskCacheStrategy.SOURCE).placeholder(R.drawable.vc_image).error(R.mipmap.ic_launcher).into(mImage);
             mAuthor.setSubtitle(mNewsData.getAuthor());
             mDate.setSubtitle(UDate.getFormatDate(new Date(mNewsData.getCreated())));
             mLink.setSubtitle(mNewsData.getUrl());
@@ -75,5 +72,16 @@ public class DetailNewActivity extends AppCompatActivity {
         mLink = (CustomDouble) findViewById(R.id.customDouble_link);
         mDate = (CustomDouble) findViewById(R.id.customDouble_date);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
